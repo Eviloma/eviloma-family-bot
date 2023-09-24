@@ -28,8 +28,7 @@ def postPaymentInfo():
     return Response(status=200)
 
 def run():
-    # serve(app, host="0.0.0.0", port=80)
-    app.run(host='0.0.0.0', port=80)
+    serve(app, host="0.0.0.0", port=80)
  
 def server_run():
     taskApi = Thread(target=run)
