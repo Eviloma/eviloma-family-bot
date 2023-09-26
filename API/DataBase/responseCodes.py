@@ -1,4 +1,4 @@
-def checkStatusCode(response):
+async def checkStatusCode(response):
     if response.status_code == 200:
         return response
     

@@ -2,7 +2,7 @@ import os
 import requests
 from API.DataBase.responseCodes import checkStatusCode
 
-def sendMonobankData(comment, time, operationAmount):
+async def sendMonobankData(comment, time, operationAmount):
     apiKey = os.getenv("PAYMENTAPIKEY")
     webSiteUrl = os.getenv("WEBSITEURL")
     endPoint = f"api/payment/deposit"
@@ -21,6 +21,6 @@ def sendMonobankData(comment, time, operationAmount):
 
     try:
         response = requests.post(requestUrl, headers=headers, json=body)
-        response = checkStatusCode(response)
+        response = await checkStatusCode(response)
     except:
         print('[API]: SendMonobankData exception. Unknown response code')
