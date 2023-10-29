@@ -10,7 +10,7 @@ async def cashBalance(message, bot):
     response = response.json()
 
     balance = response['balance'] / 100
-    id = response['sub']
+    id = response['id']
     
     text = (f"На вашому рахунку *{balance:.2f} грн. *💰\n\n")
     
