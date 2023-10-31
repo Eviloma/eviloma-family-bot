@@ -3,6 +3,7 @@ from TelegramBot.MainPageButtons.cashBalanceButton import cashBalance
 from TelegramBot.MainPageButtons.subscriptionsButton import subscribe
 from TelegramBot.MainPageButtons.transactionsButton import transaction
 from TelegramBot.MainPageButtons.unlinkButton import unlink
+from TelegramBot.MainPageButtons.supportButton import support
 
 async def getBotTextButton(message, bot):
         if message.text == "Веб-сайт 🌐":
@@ -19,3 +20,6 @@ async def getBotTextButton(message, bot):
 
         if message.text == "Від’єднати аккаунт 📱":
             return await unlink(message, bot)
+        
+        if message.text == "Підтримка 📨":
+            return await support(bot, message)
