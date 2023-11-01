@@ -9,13 +9,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      TIMESTAMP: $((date +%s))
     steps:
     - uses: actions/checkout@v3
-
-    - name: Set TIMESTAMP variable
-      run: echo "::set-env name=TIMESTAMP::$(date +%s)"
-
+    
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag eviloma-family-bot:$TIMESTAMP
 
