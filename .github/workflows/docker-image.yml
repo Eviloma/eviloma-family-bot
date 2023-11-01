@@ -13,11 +13,14 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Set TIMESTAMP variable
+      run: echo "::set-env name=TIMESTAMP::$(date +%s)"
+
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag eviloma-family-bot:$(date +%s)
+      run: docker build . --file Dockerfile --tag eviloma-family-bot:$TIMESTAMP
 
     - name: Tag the Docker image as "latest"
-      run: docker tag eviloma-family-bot:$(date +%s) eviloma-family-bot:latest
+      run: docker tag eviloma-family-bot:$TIMESTAMP eviloma-family-bot:latest
 
     - name: Log in to Docker Hub
       run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
@@ -29,4 +32,4 @@ jobs:
       run: docker push eviloma-family-bot:latest
 
     - name: Push the Docker image with version-specific tag to Docker Hub
-      run: docker push eviloma-family-bot:$(date +%s)
+      run: docker push eviloma-family-bot:$TIMESTAMP
