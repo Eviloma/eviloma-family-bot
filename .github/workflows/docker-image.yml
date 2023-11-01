@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag eviloma-family-bot:${TIMESTAMP}
+      run: docker build --file Dockerfile --tag eviloma-family-bot:${TIMESTAMP} .
 
     - name: Tag the Docker image as "latest"
       run: docker tag eviloma-family-bot:$TIMESTAMP eviloma-family-bot:latest
