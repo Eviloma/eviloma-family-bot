@@ -28,10 +28,11 @@ async def postPaymentInfo():
     
     return Response(status=200)
 
+
 async def run():
     serve(app, host="0.0.0.0", port=80)
  
 def server_run():
     taskApi = Thread(target=lambda: asyncio.run(run()))
-    taskApi.daemon = True  
+    taskApi.daemon = True
     taskApi.start()

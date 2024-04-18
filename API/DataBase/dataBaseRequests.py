@@ -23,4 +23,4 @@ async def sendMonobankData(comment, time, operationAmount):
         response = requests.post(requestUrl, headers=headers, json=body)
         response = await checkStatusCode(response)
     except:
-        print('[API]: SendMonobankData exception. Unknown response code')
+        print('[API]: SendMonobankData exception.')

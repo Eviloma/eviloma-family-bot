@@ -6,7 +6,7 @@ async def subscribe(message, bot):
     response = await getUserData(message, bot)
 
     if response == None:
-        return
+        return await bot.send_message(message.chat.id, 'Сервер не відповідає.😔 Повторіть спробу пізніше.🥹')
 
     response = response.json()
 
@@ -15,15 +15,15 @@ async def subscribe(message, bot):
     
     text = ""   
     for sub in response['subscriptions']:
-        date_string = sub['date']
+        date_string = sub['subscription']['date']
         date_object = datetime.datetime.strptime(date_string, "%Y-%m-%dT%H:%M:%S.%fZ")
         original_timezone = pytz.timezone('GMT')
         target_timezone = pytz.timezone('Europe/Kiev')
         converted_date = original_timezone.localize(date_object).astimezone(target_timezone)
         date = converted_date.strftime("%d.%m.%Y")
 
-        text +=  (f"📝 Назва підписки: *{sub['title']}*\n"
-                + f"💰 Вартість підписки: *{sub['cost'] / 100:.2f} грн/міс.*\n"
+        text +=  (f"📝 Назва підписки: *{sub['subscription']['title']}*\n"
+                + f"💰 Вартість підписки: *{sub['subscription']['price'] / 100:.2f} грн/міс.*\n"
                 + f"📆 Дата наступного платежу: *{date}*\n\n\n")
         
     return await bot.send_message(message.chat.id, text, parse_mode='Markdown')

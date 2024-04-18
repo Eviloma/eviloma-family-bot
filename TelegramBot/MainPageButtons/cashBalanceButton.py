@@ -3,9 +3,9 @@ from TelegramBot.DataBase.dataBaseRequests import getUserData
 
 async def cashBalance(message, bot):
     response = await getUserData(message, bot)
-
+    
     if response == None:
-        return
+        return await bot.send_message(message.chat.id, 'Сервер не відповідає.😔 Повторіть спробу пізніше.🥹')
 
     response = response.json()
 
@@ -15,7 +15,7 @@ async def cashBalance(message, bot):
     text = (f"На вашому рахунку *{balance:.2f} грн. *💰\n\n")
     
 
-    if response['paymentLink'] != '': 
+    if response['paymentLink'] != None: 
 
         paymentText = ( "ℹ️ Для поповнення рахунку перейдіть за посиланням нижче \n"+
                         "‼️ *ОБОВ’ЯЗКОВО в коментарі платежу вкажіть ваш ID* \n"+
