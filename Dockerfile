@@ -1,5 +1,9 @@
 FROM python:3.10-alpine
-COPY . /eviloma-family-bot
-RUN pip install -r /eviloma-family-bot/requirements.txt
-WORKDIR /eviloma-family-bot
+
+COPY . /app
+WORKDIR /app
+
+RUN apk update
+RUN pip install -r ./requirements.txt
+
 CMD ["python", "start.py"]
