@@ -5,7 +5,7 @@ async def cashBalance(message, bot):
     response = await getUserData(message, bot)
     
     if response == None:
-        return await bot.send_message(message.chat.id, 'Сервер не відповідає.😔 Повторіть спробу пізніше.🥹')
+        return
 
     response = response.json()
 
@@ -25,7 +25,7 @@ async def cashBalance(message, bot):
 
         paymentLink = response['paymentLink']
         markup = types.InlineKeyboardMarkup()
-        show_paymentLink_btn = types.InlineKeyboardButton("Поповнити рахунок ↙️", url=paymentLink)
+        show_paymentLink_btn = types.InlineKeyboardButton("Поповнити рахунок ↗️", url=paymentLink)
         markup.add(show_paymentLink_btn)
         return await bot.send_message(message.chat.id, text, parse_mode='Markdown', reply_markup=markup)
     

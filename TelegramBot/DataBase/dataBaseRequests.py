@@ -47,12 +47,12 @@ async def linkUser(message, bot):
             "token": token[1]
            }
 
-    # try:
-    response = requests.put(requestUrl, headers=headers, json=body)
-    response = await checkStatusCode(message, bot, response)
-    await sendProfilePhoto(message, bot)
-    # except:
-    #     return await bot.send_message(message.chat.id, "Виникла помилка при підключені профілю Telegram 🫣")
+    try:
+        response = requests.put(requestUrl, headers=headers, json=body)
+        response = await checkStatusCode(message, bot, response)
+        await sendProfilePhoto(message, bot)
+    except:
+        return await bot.send_message(message.chat.id, "Виникла помилка при підключені профілю Telegram 🫣")
     
     if response != None:
         if response.status_code == 200:

@@ -30,8 +30,8 @@ async def sendProfilePhoto(message, bot):
             return None
         
         try:
-            access_key = os.getenv("UPLOAD_PHOTO_ACCESS_KEY")
-            secret_key = os.getenv("UPLOAD_PHOTO_SECRET_KEY")
+            access_key = os.getenv("MINIO_ACCESS_KEY")
+            secret_key = os.getenv("MINIO_SECRET_KEY")
             
             client = Minio("s3.eviloma.org", access_key, secret_key)
             

@@ -1,12 +1,15 @@
 from TelegramBot.DataBase.dataBaseRequests import getUserData
+from telebot import types
 import datetime
 import pytz
+import os
+
 
 async def transaction(message, bot):
     response = await getUserData(message, bot)
 
     if response == None:
-        return await bot.send_message(message.chat.id, 'Сервер не відповідає.😔 Повторіть спробу пізніше.🥹')
+        return
 
     response = response.json()
 
@@ -26,5 +29,11 @@ async def transaction(message, bot):
         text +=  ( f"📝 Назва транзакції: *{transaction['title']}*\n"
                 +  f"💰 Сума транзакції: *{transaction['suma'] / 100:.2f} грн.*\n"
                 +  f"📆 Дата транзакції: *{date}*\n\n\n")
+    
+    webSiteLink = os.getenv("WEBSITEURL")
+    endPoint = 'dashboard/transactions'    
+    markup = types.InlineKeyboardMarkup()
+    show_link_btn = types.InlineKeyboardButton("Список всіх транзакцій ↗️", url=webSiteLink+endPoint)
+    markup.add(show_link_btn)
         
-    return await bot.send_message(message.chat.id, text, parse_mode='Markdown')
+    return await bot.send_message(message.chat.id, text, reply_markup=markup, parse_mode='Markdown')

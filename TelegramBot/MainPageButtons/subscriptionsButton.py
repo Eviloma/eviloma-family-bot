@@ -6,7 +6,7 @@ async def subscribe(message, bot):
     response = await getUserData(message, bot)
 
     if response == None:
-        return await bot.send_message(message.chat.id, 'Сервер не відповідає.😔 Повторіть спробу пізніше.🥹')
+        return
 
     response = response.json()
 
