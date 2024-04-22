@@ -24,7 +24,7 @@ async def showWebSiteLink(message, bot):
             caption = f'🆔 *Profile* - `{id}` \n📧 *Email* - `{email}`'
             
             if username != None:
-                text += f'\n👤 *Username* - `{username}`'
+                caption += f'\n👤 *Username* - `{username}`'
         
             return await bot.send_photo(message.chat.id, siteAvatarUrl, caption, parse_mode='Markdown', reply_markup=markup)  
         
