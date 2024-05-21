@@ -10,8 +10,8 @@ def signal_handler(signal, frame):
 signal.signal(signal.SIGINT, signal_handler)
 
 async def main():
-    connector = aiohttp.TCPConnector(force_close=True)
-    async with aiohttp.ClientSession(connector=connector) as session:
+    connector = aiohttp.TCPConnector(keepalive_timeout=7200)
+    async with aiohttp.ClientSession(connector=connector):
         server_run()
         await bot.polling(non_stop=True)
 
