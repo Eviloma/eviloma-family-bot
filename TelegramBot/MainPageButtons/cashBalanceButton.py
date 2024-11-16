@@ -13,17 +13,10 @@ async def cashBalance(message, bot):
     id = response['id']
     
     text = (f"На вашому рахунку *{balance:.2f} грн. *💰\n\n")
-    
 
     if response['paymentLink'] != None: 
-
-        paymentText = ( "ℹ️ Для поповнення рахунку перейдіть за посиланням нижче \n"+
-                        "‼️ *ОБОВ’ЯЗКОВО в коментарі платежу вкажіть ваш ID* \n"+
-                        f"📋 _(Натисніть на ID для копіювання)_ `{id}`")
-        
-        text += paymentText
-
         paymentLink = response['paymentLink']
+        paymentLink+=(f"?T={id}")
         markup = types.InlineKeyboardMarkup()
         show_paymentLink_btn = types.InlineKeyboardButton("Поповнити рахунок ↗️", url=paymentLink)
         markup.add(show_paymentLink_btn)
